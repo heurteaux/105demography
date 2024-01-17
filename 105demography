@@ -1,0 +1,6 @@
+#!/usr/bin/python3
+
+import sys
+from arguments_handling import *
+
+handle_arguments(sys.argv)
