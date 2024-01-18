@@ -1,3 +1,5 @@
+import math
+
 def get_sum_pairs(population_array):
     info_date = 1960
     result = 0
@@ -31,6 +33,22 @@ def get_sum_pairs_switched(years, population_array):
 def get_sum_y_sqr(population_array):
     return sum(info**2 for info in population_array)
 
+def display_rmsd(years, population_array, a, b):
+    predicted_values = [a * x - b for x in years]
+    squared_deviations = [(predicted - actual)**2 for predicted, actual in zip(predicted_values, population_array)]
+    mean_squared_deviations = sum(squared_deviations) / len(squared_deviations)
+    rmsd = mean_squared_deviations**0.5
+    print("Root-mean-square deviation: {:.2f}".format(rmsd / 1000000))
+
+def display_rmsd_fit2(years, population_array, a, b):
+
+    predicted_pop = [(y - b) / a for y in years]
+    squared_deviations = [(predicted - actual)**2 for predicted, actual in zip(predicted_pop, population_array)]
+    mean_squared_deviations = sum(squared_deviations) / len(squared_deviations)
+    rmsd = mean_squared_deviations**0.5
+    print("Root-mean-square deviation: {:.2f}".format(rmsd / 1000000))
+
+
 def linear_regression(population_array):
     n = 58
     sum_x = get_sum_x()
@@ -47,8 +65,10 @@ def linear_regression(population_array):
 
     print("Fit1")
     print("\tY = {:.2f} X - {:.2f}".format(aX / 1000000, abs(bX / 1000000)))
+    display_rmsd(range(1960, 2018), population_array, aX, abs(bX))
     print("Fit2")
     print("\tX = {:.2f} Y + {:.2f}".format(aY * 1000000, bY))
+    display_rmsd_fit2(range(1960, 2018), population_array, aY, bY)
         
 def do_math(population_array):
     linear_regression(population_array)
