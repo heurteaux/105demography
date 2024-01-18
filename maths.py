@@ -66,9 +66,12 @@ def linear_regression(population_array):
     print("Fit1")
     print("\tY = {:.2f} X - {:.2f}".format(aX / 1000000, abs(bX / 1000000)))
     display_rmsd(range(1960, 2018), population_array, aX, abs(bX))
+    print("\tPopulation in 2050: {:.2f}".format((aX * 2050 - abs(bX)) / 1000000))
+
     print("Fit2")
     print("\tX = {:.2f} Y + {:.2f}".format(aY * 1000000, bY))
     display_rmsd_fit2(range(1960, 2018), population_array, aY, bY)
-        
+    print("\tPopulation in 2050: {:.2f}".format(((2050 - bY) / aY) / 1000000))
+    
 def do_math(population_array):
     linear_regression(population_array)
