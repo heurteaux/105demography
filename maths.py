@@ -38,7 +38,7 @@ def display_rmsd(years, population_array, a, b):
     squared_deviations = [(predicted - actual)**2 for predicted, actual in zip(predicted_values, population_array)]
     mean_squared_deviations = sum(squared_deviations) / len(squared_deviations)
     rmsd = mean_squared_deviations**0.5
-    print("Root-mean-square deviation: {:.2f}".format(rmsd / 1000000))
+    print("\tRoot-mean-square deviation: {:.2f}".format(rmsd / 1000000))
 
 def display_rmsd_fit2(years, population_array, a, b):
 
@@ -46,7 +46,7 @@ def display_rmsd_fit2(years, population_array, a, b):
     squared_deviations = [(predicted - actual)**2 for predicted, actual in zip(predicted_pop, population_array)]
     mean_squared_deviations = sum(squared_deviations) / len(squared_deviations)
     rmsd = mean_squared_deviations**0.5
-    print("Root-mean-square deviation: {:.2f}".format(rmsd / 1000000))
+    print("\tRoot-mean-square deviation: {:.2f}".format(rmsd / 1000000))
 
 
 def linear_regression(population_array):
