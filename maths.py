@@ -49,6 +49,24 @@ def display_rmsd_fit2(years, population_array, a, b):
     print("\tRoot-mean-square deviation: {:.2f}".format(rmsd / 1000000))
 
 
+def display_correlation_coefficient(years, population_array):
+    n = len(years)
+    sum_x = get_sum_x()
+    sum_y = get_sum_y(population_array)
+    sum_x2 = sum_x_sqr()
+    sum_y2 = get_sum_y_sqr(population_array)
+    sum_xy = get_sum_pairs_switched(years, population_array)
+
+    top = (n * sum_xy) - (sum_x * sum_y)
+    bottom = ((n * sum_x2 - sum_x**2) * (n * sum_y2 - sum_y**2))**0.5
+
+    if bottom == 0:
+        return 0
+
+    r = top / bottom
+    print("Correlation: {:.4f}".format(r))
+
+
 def linear_regression(population_array):
     n = 58
     sum_x = get_sum_x()
@@ -72,6 +90,7 @@ def linear_regression(population_array):
     print("\tX = {:.2f} Y + {:.2f}".format(aY * 1000000, bY))
     display_rmsd_fit2(range(1960, 2018), population_array, aY, bY)
     print("\tPopulation in 2050: {:.2f}".format(((2050 - bY) / aY) / 1000000))
+    display_correlation_coefficient(range(1960, 2018), population_array)
     
 def do_math(population_array):
     linear_regression(population_array)
