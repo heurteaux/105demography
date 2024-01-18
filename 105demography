@@ -4,3 +4,5 @@ import sys
 from arguments_handling import *
 
 handle_arguments(sys.argv)
+
+exit(0)
